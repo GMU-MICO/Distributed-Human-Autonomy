@@ -1,9 +1,3 @@
-# Distributed-Human-Autonomy
-Distributed Resource Allocation for Human-Autonomy Teaming with Human Preference Uncertainty
-Here's your reorganized content in **GitHub Markdown** format, preserving the original structure while improving clarity and flow for a technical audience. LaTeX equations are kept as Markdown-compatible code blocks (e.g., using `$$` for display math). You can paste this into a GitHub README or documentation file.
-
----
-
 # Human Preference Modeling and Optimization in Human-Robot Collaboration
 
 ## Human Preference Modeling with Decision Field Theory (DFT)
