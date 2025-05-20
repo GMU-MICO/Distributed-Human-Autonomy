@@ -15,7 +15,7 @@ In our experimental setup, the internal preference state \$\boldsymbol{P}\_k \in
 Participants interact with a graphical user interface (GUI) to express preferences under different task scenarios:
 
 * **High urgency**: e.g., producing 100 parts in 1 day
-* **Low urgency**: e.g., producing 100 parts in 30 days
+* **Low urgency**: e.g., producing 100 parts in 7 days
 
 These preferences are fit using a multi-alternative **Decision Field Theory (DFT)** model, yielding a personalized preference vector \$\boldsymbol{P}\_k\$.
 
@@ -55,21 +55,23 @@ The system is constrained by:
 
 Where:
 
-* $A_i, B_k \in \mathbb{R}^{3 \times 2}$: resource consumption
+* $A_i\in\mathbb{R}^{3 \times 3}$, $B_k \in \mathbb{R}^{4 \times 3}$: resource consumption
 * $c \in \mathbb{R}^3$: negative of total available resource
 
 ---
 
 ## Experimental Design
 
-* **Participants**: 10 individuals, each session lasting \~1 hour
+* **Participants**: 8 individuals, each session lasting \~1 hour
 * **Interface**: GUI to assess preferences across different stakes and robot attributes
-* **Modeling**: DFT parameters ($\phi_1,\phi_2,\epsilon,\tau,\beta$) estimated via Apollo choice modeling software \[[Hess 2019](https://doi.org/10.1016/j.jocm.2018.08.002)]
+* **Modeling**: DFT parameters ($\phi_1,\phi_2,\epsilon,\tau,\beta$) estimated via Apollo choice modeling software.
 
 Participants validated whether the system-predicted robot matched their preference. This setup is both human-centric and scalable, and it enables risk-aware pairing of humans and robots.
 
----
+GUI:
+![Sample Survey Problem](https://github.com/user-attachments/assets/c7b1d31d-744e-4be8-8109-b1cf687ac4bd)
 
+---
 ## Cognitive Modeling with DFT
 
 DFT accounts for key cognitive effects:
@@ -86,6 +88,9 @@ These are embedded into the GUI and verified via surveys. Results reveal the inf
 
 The resulting $E(P_k)$ and $P_k$ values are then mapped to human responses $y_k$.
 
+Prediction Satisfaction:
+![User Satisfaction Based on Human-Centric Predictions](https://github.com/user-attachments/assets/4443ffa5-e9d8-4b57-9325-a0d7ff86375d)
+
 ---
 
 ## Optimization vs. Evaluation Phases
@@ -99,9 +104,9 @@ The resulting $E(P_k)$ and $P_k$ values are then mapped to human responses $y_k$
 
 We simulate three modeling strategies:
 
-* **Group 1**: Our method using both mean and covariance of $y_k$
-* **Group 2**: Uses only the mean of $y_k$, ignores uncertainty
-* **Group 3**: Naive baseline using previous $y_k$ as input
+* **Our Algorithm**: Our method using both mean and covariance of $y_k$
+* **Baseline 1**: Uses only the mean of $y_k$, ignores uncertainty
+* **Baseline 2**: Naive baseline using previous $y_k$ as input
 
 ---
 
@@ -146,11 +151,6 @@ $\gamma = 100$. Index computed for 1000 sampled realizations of $y_k$ using fixe
 
 ![Performance Boxplot](fig/performance_boxplot.png)
 
-**Interpretation**:
-
-* **Group 1**: Lowest performance index with least variance
-* **Group 2**: Ignores uncertainty; higher and scattered index
-* **Group 3**: Worst performance overall
 
 ---
 
@@ -161,29 +161,16 @@ We model two human behavior types:
 * **Lazy**: Decrease effort when robots are more active
 * **Hardworking**: Increase effort when robots are active
 
-### Scenarios Tested
+### Scenarios Tested: Work share between humans and robots and associated system cost across different human types.
 
-* Both lazy
-* Both hardworking
-* Mixed cases (1 lazy, 1 hardworking)
+* Both humans tend to be in less productive mode
+  ![neither](https://github.com/user-attachments/assets/51060c89-2082-4f47-90c0-1a2f918782d5)
+
+* Both humans tend to be in productive mode
+  ![both](https://github.com/user-attachments/assets/d13951ab-8b38-41c5-b51d-e5401f7c07b7)
+
+* Mixed cases 
+![either](https://github.com/user-attachments/assets/31ab517a-3577-42ea-ac7a-834ad900ccdb)
 
 The optimization algorithm remains unchanged.
 
-### Results
-
-![Scenario Pie Chart](fig/piechart.pdf)
-
-**Figure**: Work share between humans and robots and associated system cost across different human types.
-
----
-
-## References
-
-* Roe et al. (2001), "Multialternative Decision Field Theory"
-* Busemeyer & Townsend (2002), "Decision Field Theory: A Dynamic-Cognitive Approach"
-* Hancock et al. (2018), "Modeling Human Preference Evolution"
-* Hess et al. (2019), "Apollo: A flexible, powerful and customizable freeware package for choice model estimation"
-
----
-
-Let me know if you'd like the images inlined, paths corrected, or the table converted to CSV/HTML for GitHub rendering.
