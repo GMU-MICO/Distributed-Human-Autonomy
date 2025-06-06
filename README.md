@@ -24,7 +24,7 @@ These preferences are fit using a multi-alternative **Decision Field Theory (DFT
 We define a response function:
 
 ```math
-y_k = r_k(\boldsymbol{P}_k),
+y_k = r_k({P}_k),
 ```
 
 where $y_k$ represents the expected production capability contributed by human $k$. The most preferred robot is selected using \$\arg\max\_j P\_{k,j}\$, and \$y\_k\$ is assigned based on empirical data. This allows for systematic, interpretable integration into optimization.
