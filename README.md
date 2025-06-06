@@ -2,7 +2,7 @@
 
 ## Human Preference Modeling with Decision Field Theory (DFT)
 
-In our experimental setup, the internal preference state \$\boldsymbol{P}\_k \in \mathbb{R}^5\$ characterizes human worker $k$'s subjective evaluation over five robot options, each described by:
+In our experimental setup, the internal preference state \${P}\_k \in \mathbb{R}^5\$ characterizes human worker $k$'s subjective evaluation over five robot options, each described by:
 
 * Energy consumption
 * Safety
@@ -17,7 +17,7 @@ Participants interact with a graphical user interface (GUI) to express preferenc
 * **High urgency**: e.g., producing 100 parts in 1 day
 * **Low urgency**: e.g., producing 100 parts in 7 days
 
-These preferences are fit using a multi-alternative **Decision Field Theory (DFT)** model, yielding a personalized preference vector \$\boldsymbol{P}\_k\$.
+These preferences are fit using a multi-alternative **Decision Field Theory (DFT)** model, yielding a personalized preference vector \${P}\_k\$.
 
 ### Mapping Preferences to Production Behavior
 
