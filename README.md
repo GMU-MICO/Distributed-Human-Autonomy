@@ -62,11 +62,17 @@ Where:
 
 ## Experimental Design
 
-* **Participants**: 8 individuals, each session lasting \~1 hour
-* **Interface**: GUI to assess preferences across different stakes and robot attributes
-* **Modeling**: DFT parameters ($\phi_1,\phi_2,\epsilon,\tau,\beta$) estimated via Apollo choice modeling software.
+Eight healthy individuals (ages 20–30) affiliated with Clemson University participated in the study; fewer than half had prior experience with robots. Each session (~1 hour) was conducted in a quiet laboratory using a desktop computer, monitor, and mouse. A custom Python-based GUI presented real-time radar charts visualizing five robot attributes: energy consumption, pace, intelligence, safety, and reliability. In each of the 40 trials per participant (320 trials total), participants selected their preferred option from three robot working modes with varying attribute profiles, under different contextual stakes (e.g., urgent vs. non-urgent scenarios). Preferences were modeled using Decision Field Theory (DFT), with parameters ($\phi_1, \phi_2, \epsilon, \tau, \beta$) estimated via the Apollo choice modeling package.
 
-Participants validated whether the system-predicted robot matched their preference. This setup is both human-centric and scalable, and it enables risk-aware pairing of humans and robots.
+The choice context was encoded as an attribute matrix \(M \in \mathbb{R}^{3 \times 5}\):
+
+| Working Mode | Energy | Pace | Intelligence | Safety | Reliability |
+|--------------|--------|------|--------------|--------|-------------|
+| Mode 1       | M₁,₁   | M₁,₂ | M₁,₃         | M₁,₄   | M₁,₅        |
+| Mode 2       | M₂,₁   | M₂,₂ | M₂,₃         | M₂,₄   | M₂,₅        |
+| Mode 3       | M₃,₁   | M₃,₂ | M₃,₃         | M₃,₄   | M₃,₅        |
+
+The radar charts used in the GUI were designed to visually reflect these values and were dynamically adjusted based on task urgency. Participants validated whether the system-predicted robot matched their actual preference.
 
 GUI:
 ![Sample Survey Problem](https://github.com/user-attachments/assets/c7b1d31d-744e-4be8-8109-b1cf687ac4bd)
@@ -74,19 +80,21 @@ GUI:
 ---
 ## Cognitive Modeling with DFT
 
-DFT accounts for key cognitive effects:
+Decision Field Theory (DFT) accounts for key cognitive effects in human decision-making, including:
 
-* Similarity
-* Attraction
-* Compromise
+* **Similarity effect**
+* **Attraction effect**
+* **Compromise effect**
 
-These are embedded into the GUI and verified via surveys. Results reveal the influence of:
+These effects are embedded into the GUI and verified via post-task surveys. Results reveal the influence of several cognitive factors:
 
 * Sensitivity ($\phi_1$)
 * Memory decay ($\phi_2$)
 * Cognitive noise ($\epsilon$)
 
-The resulting $E(P_k)$ and $P_k$ values are then mapped to human responses $y_k$.
+To quantify these cognitive mechanisms, we fit the DFT model to each participant’s decisions using maximum likelihood estimation. Parameter estimation was conducted using the [Apollo](https://apollo.readthedocs.io/en/latest/) package with the BFGS optimizer. Each participant completed 40 trials, for a total of 320 across all participants. Of these, 240 samples were used for training and 80 for validation. The fitted models achieved a peak prediction accuracy of **79.3%**, demonstrating the effectiveness of the DFT-based modeling framework.
+
+The resulting internal preference states $P_k$ and their expectations $E(P_k)$ were saved in `.json` format and re-imported into MATLAB for use in downstream optimization. These values are subsequently mapped to human responses $y_k$ via the learned response function $r_k(P_k)$.
 
 Prediction Satisfaction:
 ![User Satisfaction Based on Human-Centric Predictions](https://github.com/user-attachments/assets/4443ffa5-e9d8-4b57-9325-a0d7ff86375d)
@@ -174,3 +182,16 @@ We model two human behavior types:
 
 The optimization algorithm remains unchanged.
 
+## Limitations and Future Work
+
+This study serves as a proof of concept for modeling and integrating human preferences into distributed optimization. While the lab-controlled setup and limited participant size constrain generalizability, the structure enables clear insights into individual decision dynamics.
+
+Future work will include:
+
+- Scaling to more diverse participant populations  
+- Incorporating time-series cross-validation methods  
+- Studying bidirectional adaptation between human and robot behavior over time  
+- Extending to dynamic or time-varying human preferences  
+- Incorporating additional uncertainty modes (e.g., communication delay, adversarial behavior)  
+
+---
