@@ -157,7 +157,8 @@ $\gamma = 100$. Index computed for 1000 sampled realizations of $y_k$ using fixe
 
 ### Boxplot: Total Performance Comparison
 
-![Performance Boxplot](fig/performance_boxplot.png)
+<img width="2904" height="1697" alt="performance_boxplot" src="https://github.com/user-attachments/assets/1f50a134-96c2-43f9-b0c4-c42b5d6d0f6c" />
+
 
 
 ---
